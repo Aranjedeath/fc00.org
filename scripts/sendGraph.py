@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
-# Based on Kyrias' sendGraph script. Requires Python 3, requests and cjdns.
-# You can install them using pip: pip3 install cjdns requests
+#!/usr/bin/env python2
+# Based on zielmicha's sendGraph script. Requires Python 2, requests and cjdns.
+# You can install them using pip: pip install cjdns requests
 ###############################################################################
 # CONFIG
 
@@ -8,7 +8,7 @@
 #    www.fc00.org              for clearnet access
 #    h.fc00.org                for hyperboria
 #    [fc53:dcc5:e89d:9082:4097:6622:5e82:c654] for DNS-less access
-url = 'http://www.fc00.org/sendGraph'
+url = 'http://h.fc00.org/sendGraph'
 
 # update your email address, so I can contact you in case something goes wrong
 your_mail = 'your@email.here'
@@ -39,7 +39,7 @@ import cjdns
 from cjdns import key_utils
 from cjdns import admin_tools
 
-import queue
+import Queue
 import threading
 
 def main():
@@ -54,8 +54,8 @@ def main():
     nodes = dump_node_store(con)
     edges = {}
 
-    get_peer_queue = queue.Queue(0)
-    result_queue = queue.Queue(0)
+    get_peer_queue = Queue.Queue(0)
+    result_queue = Queue.Queue(0)
 
     for k in nodes:
         get_peer_queue.put(k)
@@ -79,7 +79,7 @@ def worker(nodes, get_peer_queue, result, verbose=False):
     while True:
         try:
             k = get_peer_queue.get_nowait()
-        except queue.Empty:
+        except Queue.Empty:
             return
 
         node = nodes[k]
