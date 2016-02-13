@@ -19,7 +19,7 @@ chmod +x sendGraph.py
 ./sendGraph.py
 # For example, add it to crontab on Linux
 (crontab -l; echo "@hourly /root/sendGraph.py") | crontab -
-or on FreeBSD
+# or on FreeBSD
 (crontab -l; echo "@hourly /usr/local/bin/python2 /root/sendGraph.py > /dev/null 2>&1") | crontab -
 ```
 
